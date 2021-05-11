@@ -1,6 +1,7 @@
 # Cảnh sát chấm công
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/tienhm0202/canh-sat-cham-cong/tree/master
+)
 
 Environment: python3.5, pip
 
