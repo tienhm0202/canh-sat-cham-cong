@@ -1,7 +1,7 @@
 {
   "name": "Cảnh sát chấm công",
   "description": "Dùng Slack và Airtable để chấm công online - fix nhanh khi phải work remote trong đại dịch Covid",
-  "repository": "https://github.com/EwayJSC/canh-sat-cham-cong",
+  "repository": "https://github.com/tienhm0202/canh-sat-cham-cong",
   "logo": "https://i.imgur.com/axUUCjq.jpg",
   "keywords": ["python", "slack", "airtable"]
 }
