@@ -1,5 +1,7 @@
 # Cảnh sát chấm công
 
+https://heroku.com/deploy?template=https://github.com/tienhm0202/canh-sat-cham-cong/tree/master
+
 Environment: python3.5, pip
 
 Tool được phát triển bởi đội devs của EWAY - ứng phó nhanh với việc làm remote 
