@@ -4,7 +4,7 @@ from datetime import datetime
 from slackclient import SlackClient
 
 import config
-from utils.airtable_connector import get_user_check_in, check_in
+from utils import airtable_connector
 
 
 slack_cli = SlackClient(config.SLACK_BOT_TOKEN)
@@ -39,10 +39,10 @@ def morning(user_id, channel_id, ts):
         return None, None
 
     to_day = datetime.today().strftime("%-d/%-m/%Y")
-    if not get_user_check_in(email, to_day):
+    if not airtable_connector.get_user_check_in(email, to_day):
         print("checkin for this user: ", email)
         channel_name = get_channel(channel_id)
-        check_in(email, channel_name)
+        airtable_connector.check_in(email, channel_name)
         slack_cli.api_call("reactions.add",
                            channel=channel_id,
                            name=config.SLACK_REACTION_EMOJI,
@@ -53,4 +53,29 @@ def morning(user_id, channel_id, ts):
                            name="+1",
                            timestamp=ts)
     print("added reaction")
+    return
+
+
+def bye(user_id, channel_id, ts):
+    print("User send a bye command")
+    email = get_user(user_id)
+    if not email:
+        print(" * Invalid email! Do nothing")
+        return None, None
+
+    to_day = datetime.today().strftime("%-d/%-m/%Y")
+    checked_in_id = airtable_connector.get_user_bye(email, to_day)
+    if checked_in_id:
+        print(" * checkout for this user: ", email, "on", to_day)
+        airtable_connector.bye(checked_in_id)
+        slack_cli.api_call("reactions.add",
+                           channel=channel_id,
+                           name=config.SLACK_REACTION_EMOJI,
+                           timestamp=ts)
+    else:
+        slack_cli.api_call("reactions.add",
+                           channel=channel_id,
+                           name="+1",
+                           timestamp=ts)
+    print(" * added reaction")
     return

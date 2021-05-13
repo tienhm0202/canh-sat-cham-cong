@@ -38,7 +38,6 @@ def slack_bot():
     }
     """
     data = request.json
-    print(data)
 
     if data.get("challenge"):
         return make_response(jsonify(challenge=data["challenge"]), 200)
@@ -62,6 +61,10 @@ def _processing_message(message, user, channel=None, ts=None):
         autobot.morning(user, channel, ts)
     elif all(x in message for x in config.SLACK_PATTERN["daily"]):
         autobot.morning(user, channel, ts)
+    elif all(x in message for x in config.SLACK_PATTERN["bye"]):
+        autobot.bye(user, channel, ts)
+    elif all(x in message for x in config.SLACK_PATTERN["Bye"]):
+        autobot.bye(user, channel, ts)
 
     return
 
